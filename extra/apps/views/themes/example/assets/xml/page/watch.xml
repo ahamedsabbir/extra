@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<root>
+	<index status="1" id="1">
+		<includes status="1" id="1">
+			<part id="1" sn="1" status="1">header</part>
+			<part id="2" sn="2" status="1">banner</part>
+			<part id="3" sn="1" status="1">search</part>
+			<part id="3" sn="2" status="1">watch</part>
+			<part id="3" sn="2" status="1">pagenation</part>
+			<part id="3" sn="2" status="1">footer</part>
+		</includes>
+	</index>
+</root>

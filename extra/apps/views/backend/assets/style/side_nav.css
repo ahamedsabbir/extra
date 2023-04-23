@@ -1,0 +1,86 @@
+.leftsidenav {
+    display: none;
+    height: 100%;
+    width: 300px;
+    position: fixed;
+    z-index: 9000;
+    top: 0;
+    left: 0;
+    background-color: black;
+    overflow-x: hidden;
+    transition: 0.5s;
+}
+.leftsidenav .closebtn {
+	color: #ea0000;
+	position: absolute;
+	top: 5px;
+	right: 25px;
+	color: #ea0000;
+	/* margin-left: 25px; */
+	font-size: 30px;
+	font-weight: bold;
+}
+.rightsidenotification {
+    display: none;
+    height: 100%;
+    width: 360px;
+    position: fixed;
+    z-index: 9000;
+    top: 0;
+    right: 0;
+    background-color: black;
+    overflow-x: hidden;
+    transition: 0.10s;
+}
+.rightsidenotification .closebtn {
+	color: #ea0000;
+	position: absolute;
+	top: 5px;
+	right: 25px;
+	color: #ea0000;
+	/* margin-left: 25px; */
+	font-size: 30px;
+	font-weight: bold;
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

@@ -1,0 +1,1 @@
+<?php include(backend_class::inc("samojug", $plugins_type, $plugins)); ?>

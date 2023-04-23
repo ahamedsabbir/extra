@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<root>
+   	<soft id="1">
+		<name>portfolio</name>
+		<title>al kind of x videos in here.</title>
+		<keywords>comics, good comics,</keywords>
+		<description>&amp;lt;p&amp;gt;many x video on this site.&amp;lt;/p&amp;gt;</description>
+		<author>Israt Ahamed Sabbir</author>
+		<icon>repository/uploads/publish/0b5d3c39e2987b4.jpg</icon>
+		<slider_one>repository/uploads/publish/59c8e7848dcdb3c.jpg</slider_one>
+		<slider_two>repository/uploads/publish/7980a6b30b90a97.jpg</slider_two>
+		<slider_three>repository/uploads/publish/7980a6b30b90a97.jpg</slider_three>
+		<banner>repository/uploads/publish/59c8e7848dcdb3c.jpg</banner>
+		<banner_title>Web Designer, Web Developer</banner_title>
+		<banner_description>hello i am sabbir</banner_description>
+		<post_datatable>framework_project_datatable</post_datatable>
+		<status>1</status>
+	</soft>
+</root>

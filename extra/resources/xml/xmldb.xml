@@ -1,0 +1,7 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<root>
+	<database name="mvc_database">
+		<datatable name="school">
+		<datarow sn="1" id="dr_1493804459"><name>Q29udGVudCBFZGl0</name><email>aXNyYXRhaGFtZWRzYWJiaXJAZ21haWwuY29t</email><mobile>MDE3NzU1Njc0OTM=</mobile><password>YWJjZDEyMzQ=</password><update>MTEwOTIy</update><status>MA==</status></datarow></datatable>
+</database>
+</root>

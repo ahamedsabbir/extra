@@ -1,0 +1,1 @@
+<?php echo soft_class::script("style/bootstrap.min"); ?>

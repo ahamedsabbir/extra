@@ -1,0 +1,193 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <title>Online Video Thumbnail Generator</title>
+  <meta name="description" content="Online tool to create snapshots of videos (local file or online by URL)">
+  <link rel="stylesheet" href="extra/apps/views/soft/thumbnail/assets/css/style.css" >
+  <style>
+
+  </style>
+  <!-- Global site tag (gtag.js) - Google Analytics -->
+  <script async src="https://www.googletagmanager.com/gtag/js?id=G-RKLKKLZFDQ"></script>
+  <script>
+    window.dataLayer = window.dataLayer || [];
+    function gtag() { dataLayer.push(arguments); }
+    gtag('js', new Date());
+    gtag('config', 'G-RKLKKLZFDQ');
+  </script>
+  <link href="https://unpkg.com/material-components-web@latest/dist/material-components-web.min.css" rel="stylesheet">
+  <script src="https://unpkg.com/material-components-web@latest/dist/material-components-web.min.js"></script>
+  <link rel="stylesheet" href="https://fonts.googleapis.com/icon?family=Material+Icons">
+  <script>
+    function showInput(id, opt) {
+      console.log(opt)
+      document.getElementById('select-file').style.display = 'none';
+      document.getElementById('select-url').style.display = 'none';
+      document.getElementById(id).style.display = '';
+    }
+    function loadPage() {
+      var textFields = document.querySelectorAll('.mdc-text-field');
+      for (let index = 0; index < textFields.length; index++) {
+        var element = textFields[index];
+        new mdc.textField.MDCTextField(element);
+      }
+    }
+    window.addEventListener("load", loadPage);
+  </script>
+</head>
+
+<body>
+  <header class="mdc-top-app-bar">
+    <div class="mdc-top-app-bar__row">
+      <section class="mdc-top-app-bar__section mdc-top-app-bar__section--align-start">
+        <!--<button class="material-icons mdc-top-app-bar__navigation-icon mdc-icon-button" aria-label="Open navigation menu">menu</button>-->
+        <span class="mdc-top-app-bar__title">Online Video Thumbnail Generator</span>
+      </section>
+      <!-- <section class="mdc-top-app-bar__section mdc-top-app-bar__section--align-end" role="toolbar">
+        <a class="toolbar-menu" target="_blank" href="https://forms.gle/AkvW2rRQsTfobxFE8"
+          title="Feedback and feature requests">Feedback</a>
+        &nbsp;
+        <button onclick="document.location='https://github.com/fraigo/online-video-thumbnail-generator'"
+          class="material-icons mdc-top-app-bar__action-item mdc-icon-button" aria-label="Options">
+          <img src="https://github.com/fluidicon.png" width="48"></button>
+      </section> -->
+    </div>
+  </header>
+  <main class="mdc-top-app-bar--fixed-adjust">
+    <div class="video_data">
+      <div class="mdc-card mdc-card--outlined">
+        <div>
+          <div class="mdc-form-field" >
+            <div class="mdc-radio">
+              <input class="mdc-radio__native-control" type="radio" onclick="showInput('select-url', this)" id="video_url"
+                name="video_source">
+              <div class="mdc-radio__background">
+                <div class="mdc-radio__outer-circle"></div>
+                <div class="mdc-radio__inner-circle"></div>
+              </div>
+              <div class="mdc-radio__ripple"></div>
+            </div>
+            <label for="video_url">Video from URL</label>
+          </div>
+  
+          <div class="mdc-form-field" >
+            <div class="mdc-radio">
+              <input class="mdc-radio__native-control" type="radio" onclick="showInput('select-file', this)" id="video_file"
+                checked name="video_source">
+              <div class="mdc-radio__background">
+                <div class="mdc-radio__outer-circle"></div>
+                <div class="mdc-radio__inner-circle"></div>
+              </div>
+              <div class="mdc-radio__ripple"></div>
+            </div>
+            <label for="video_file">Video from file</label>
+          </div>
+        </div>
+
+        <div class="instructions mdc-form-field">(Currently, youtube/vimeo video URLS are not supported, only URLs
+          pointing to a video resource)</div>
+      </div>
+      <br />
+      <div class="mdc-card mdc-card--outlined select-source">
+        <div id="select-file">
+          <input type="file" class="mdc-text-field__input" id="videofile" accept=".mp4" onchange="loadVideoFile()">
+        </div>
+        <div id="select-url" style="display:none">
+          <label class="mdc-text-field mdc-text-field--filled">
+            <span class="mdc-text-field__ripple"></span>
+            <span class="mdc-floating-label" id="url-label">Video URL</span>
+            <input id="videourl" size="100" class="mdc-text-field__input" type="text" placeholder="https://"
+              aria-labelledby="url-label">
+            <span class="mdc-line-ripple"></span>
+          </label>
+          <div class="mdc-touch-target-wrapper">
+            <button class="mdc-button mdc-button--raised"
+              onclick="loadVideoURL(document.getElementById('videourl').value)">
+              <span class="mdc-button__ripple"></span>
+              <span class="mdc-button__touch"></span>
+              <span class="mdc-button__label">Load video</span>
+            </button>
+          </div>
+          <div class="instructions mdc-form-field">
+            For youtube URLs, you can use a service to convert Youtube videos to MP4 files (Google for "Youtube mp4").
+            <ul>
+              <li>Use the provided "Download link" URL here, or </li>
+              <li>Download the file to your device and select "Video from file"</li>
+            </ul>
+          </div>
+        </div>
+      </div>
+      <div class="mdc-card mdc-card--outlined video-preview">
+        <video id="video" controls width="640">
+          <source src="blank.mp4" type="video/mp4">
+        </video>
+        <div id="videoInfo" class="mdc-card">
+        </div>
+        <div>Select the frame to capture using video controls.</div>
+        <div id="videoControls" class="video-controls" style="display:none">
+          <div>
+              <input id="slider" oninput="goToTime(video,this.value)" onmouseover="this.title=this.value+'seg'" type="range" min="0" max="100" value="0" name="position">
+          </div>
+          <div class="button-container">
+            <button category="controls" onclick="goToTime(video,0)">⏮<br><span>&nbsp;</span></button>
+            <button category="controls" onclick="goToTime(video,video.currentTime-60)">⏪<br><span>-1m</span></button>
+            <button category="controls" onclick="goToTime(video,video.currentTime-5)">⏪<br><span>-5s</span></button>
+            <button category="controls" onclick="goToTime(video,video.currentTime-1)">⏪<br><span>-1s</span></button>
+            <button category="controls" onclick="goToTime(video,video.currentTime-1/25)">⏪<br><span>-1fr</span></button>
+            <button category="controls" onclick="video.paused?video.play():video.pause()">⏯<br><span>&nbsp;</span></button>
+            <button category="controls" onclick="goToTime(video,video.currentTime+1/25)">⏩<br><span>+1fr</span></button>
+            <button category="controls" onclick="goToTime(video,video.currentTime+1)">⏩<br><span>+1s</span></button>
+            <button category="controls" onclick="goToTime(video,video.currentTime+5)">⏩<br><span>+5s</span></button>
+            <button category="controls" onclick="goToTime(video,video.currentTime+60)">⏩<br><span>+1m</span></button>
+            <button category="controls" onclick="goToTime(video,video.duration)">⏭<br><span>&nbsp;</span></button>  
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="video_output">
+      <div class="mdc-card mdc-card--outlined select-source">
+        <div>
+          <label class="mdc-text-field mdc-text-field--filled" id="videowidth">
+            <span class="mdc-text-field__ripple"></span>
+            <span class="mdc-floating-label" id="size-label">Image width</span>
+            <input id="videow" type=number size="5" onchange="resize()" value="640" class="mdc-text-field__input"
+              type="text" placeholder="" aria-labelledby="size-label" readonly>
+            <span class="mdc-line-ripple"></span>
+          </label>
+          <button id="snap" class="mdc-button mdc-button--raised snap_photo_btn" onclick="snapPicture()" disabled>
+            <span class="mdc-button__ripple"></span>
+            <span class="mdc-button__touch"></span>
+            <span class="mdc-button__label">Snap photo</span>
+            <span></span>
+          </button>
+        </div>
+        <a href="" id="imagelink" style="display:none">Image link</a>
+        <div class="canvas-container">
+          <canvas id="canvas" width="640" height="480"></canvas>
+          <div>
+            <button id="save" class="mdc-button mdc-button--raised save_btn" onclick="savePicture()" disabled>
+              <span class="mdc-button__ripple"></span>
+              <span class="mdc-button__touch"></span>
+              <span class="mdc-button__label save_txt">Save Image</span>
+              <span></span>
+            </button>
+            <span id="snapsize"></span>
+          </div>
+        </div>
+
+      </div>
+    </div>
+
+  </main>
+
+  <!-- start the script ... within that declare variables as follows... -->
+  <script src="extra/apps/views/soft/thumbnail/assets/js/app.js?20211027"></script>
+
+</body>
+
+</html>

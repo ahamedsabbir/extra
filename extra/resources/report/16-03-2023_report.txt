@@ -1,0 +1,24 @@
+11:28 am success visitor:- new visitor come.
+8:27 pm error mobile:- Mobile Number not valid. Like 01775567493
+8:27 pm error signin:- you are not member.
+8:27 pm error mobile:- Mobile Number not valid. Like 01775567493
+8:27 pm error signin:- you are not member.
+8:28 pm error mobile:- Mobile Number not valid. Like 01775567493
+8:28 pm error signin:- you are not member.
+8:32 pm error mobile:- Mobile Number not valid. Like 01775567493
+8:32 pm error signin:- you are not member.
+8:34 pm error mobile:- Mobile Number not valid. Like 01775567493
+8:34 pm error signin:- you are not member.
+8:35 pm error mobile:- Mobile Number not valid. Like 01775567493
+8:35 pm error signin:- you are not member.
+8:35 pm error mobile:- Mobile Number not valid. Like 01775567493
+8:35 pm error signin:- you are not member.
+8:36 pm error mobile:- Mobile Number not valid. Like 01775567493
+8:36 pm error signin:- you are not member.
+8:36 pm error mobile:- Mobile Number not valid. Like 01775567493
+8:36 pm error signin:- you are not member.
+8:36 pm error mobile:- Mobile Number not valid. Like 01775567493
+8:36 pm error signin:- you are not member.
+8:37 pm error mobile:- please enter Empty.
+8:37 pm error mobile:- Mobile Number not valid. Like 01775567493
+8:37 pm error signin:- you are not member.

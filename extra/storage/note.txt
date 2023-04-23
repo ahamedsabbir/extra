@@ -1,0 +1,235 @@
+<?php
+class plugins_memory_class extends backend_controller_class{
+	public $plugins;
+	public $plugins_type;
+	public $plugins_folder;
+	public $primary_datatable;
+  	public $upload_image;
+	public $upload_file;
+	public $upload_video;
+	public function __construct(){
+		parent::__construct();
+		session_class::session_check("admin_crowd_class", "index_page_function", "sign-out");	
+		$this->get_data_array["plugins"] = $this->plugins = "memory";
+		$this->get_data_array["plugins_type"] = $this->plugins_type = "plugins";
+		$this->get_data_array["plugins_folder"] = $this->plugins_folder = "app/views/backend/".$this->plugins_type."/".$this->plugins;
+      	$this->upload_video = $this->upload_file = $this->upload_image = UPLOAD_FOLDER.$this->plugins;
+	}
+  	public function index_page_function($page = null, $array_key = false, $array_value = false){
+		$this->view_load_object_arrays->view_load_functions(backend_class::page($page, $this->plugins_type, $this->plugins), $this->get_data_array);
+	}
+  
+  	public function note_page_function($page = null, $array_key = false, $array_value = false){
+      	$noteUrl = "storage/note.txt";
+      	$noteFile = fopen($noteUrl, 'r');
+      	$this->get_data_array["fdata"] = fread($noteFile, filesize($noteUrl));
+		$this->view_load_object_arrays->view_load_functions(backend_class::page($page, $this->plugins_type, $this->plugins), $this->get_data_array);
+      	fclose($noteFile);
+	}
+  	public function note_save_function($page = null, $array_key = false, $array_value = false){
+      	$postData = $_POST["data"];
+      	$noteFile = fopen('storage/note.txt', 'a');
+      	fwrite($noteFile, $postData);
+      	fclose($noteFile);
+		$this->view_load_object_arrays->view_load_functions(backend_class::page($page, $this->plugins_type, $this->plugins), $this->get_data_array);
+	}
+  
+  
+	public function contacts_page_function($page = null, $array_key = false, $array_value = false){    
+      	$this->get_data_array["contacts_datatable"] = $this->model_array["pagenation_db_class"]->pagenation_select_db_function("contacts_datatable", array("status" => 1), "NAME ASC", $this->pageno, pagenation_class::$loop_item);
+		$this->view_load_object_arrays->view_load_functions(backend_class::page($page, $this->plugins_type, $this->plugins), $this->get_data_array);
+	}
+  	public function contacts_insert_function($page = null, $array_key = false, $array_value = false){
+      if(isset($_POST["submit"]) AND $_POST["submit"] == "save" AND isset($_POST["name"]) AND isset($_POST["mobile"])){
+        	$name = parent::data_control("name");
+			$contacts_exist = $this->model_array["count_db_class"]->count_db_function("contacts_datatable", array("name" => $name));
+			if($contacts_exist == 0){
+              	$mobile = trim(implode(", ", $_POST["mobile"]), ", ");
+				$insert_data_array = array(
+                	"name" => $name,
+                  	"image" => parent::file_control("image", settings_class::$image_extension, settings_class::$image_size, $this->upload_image),
+                  	"mobile" => $mobile,
+                  	"email" => $this->method_array["text_validation_class"]->text_validate("email")->email_validate()->valid_data("email"),
+                  	"address" => $this->method_array["text_validation_class"]->text_validate("address")->valid_data("address"),
+                  	"note" => $this->method_array["text_validation_class"]->text_validate("note")->valid_data("note"),
+                  	"status" => 1
+                );
+				if($this->method_array['text_validation_class']->submit() AND $this->method_array['file_validation_class']->submit()){
+					$insert = $this->model_array['insert_db_class']->insert_db_function("contacts_datatable", $insert_data_array);
+					if($insert == true){
+                      	$msg = getMsg_class::set("sucessfully insert");
+						header(address_class::header_page("plugins_memory_class", "contacts_page_function", $page, "&msg=$msg"));	
+					}else{
+						report_class::set_report("signin", "error", "you are not member.");
+						$this->view_load_object_arrays->view_load_functions(backend_class::page($page, $this->plugins_type, $this->plugins), $this->get_data_array);
+					}
+				}else{
+					report_class::set_report("signin", "error", "you are not member.");
+					$this->view_load_object_arrays->view_load_functions(backend_class::page($page, $this->plugins_type, $this->plugins), $this->get_data_array);
+				}
+			}else{
+				report_class::set_report("signin", "error", "you are not member.");
+				$this->view_load_object_arrays->view_load_functions(backend_class::page($page, $this->plugins_type, $this->plugins), $this->get_data_array);
+			}	
+		}else{
+        	$msg = getMsg_class::set("some problem");
+			header(address_class::header_page("plugins_memory_class", "contacts_page_function", "contacts", "&msg=$msg"));
+		}
+	}
+  	public function contacts_search_function($page = null, $array_key = false, $array_value = false){
+    	$keywords = isset($_POST['search']) ? $_POST['search'] : false;	
+		$this->get_data_array["contacts_datatable"] = $this->model_array["search_db_class"]->search_select_db_function("contacts_datatable", array("name" => $keywords, "mobile" => $keywords), array("status" => 1), "NAME ASC", $this->pageno);
+      	$this->view_load_object_arrays->view_load_functions(backend_class::page($page, $this->plugins_type, $this->plugins), $this->get_data_array);
+    }
+  	public function contacts_update_function($page = null, $array_key = false, $array_value = false){}
+    public function contacts_delete_function($page = null, $array_key = false, $array_value = false){}
+  
+  
+  
+  
+  	public function website_page_function($page = null, $array_key = false, $array_value = false){    
+      	$this->get_data_array["website_datatable"] = $this->model_array["pagenation_db_class"]->pagenation_select_db_function("website_datatable", array("status" => 1), "NAME ASC", $this->pageno, pagenation_class::$loop_item);
+		$this->view_load_object_arrays->view_load_functions(backend_class::page($page, $this->plugins_type, $this->plugins), $this->get_data_array);
+	}
+  	public function website_insert_function($page = null, $array_key = false, $array_value = false){
+      if(isset($_POST["submit"]) AND $_POST["submit"] == "save"){
+        	$name = parent::data_control("name");
+			$website_exist = $this->model_array["count_db_class"]->count_db_function("website_datatable", array("name" => $name));
+			if($website_exist == 0){
+              	$mobile = trim(implode(", ", $_POST["mobile"]), ", ");
+				$insert_data_array = array(
+                	"name" => $name,
+                  	"title" => $this->method_array["text_validation_class"]->text_validate("title")->valid_data("title"),
+                  	"note" => $this->method_array["text_validation_class"]->text_validate("note")->valid_data("note"),
+                  	"status" => 1
+                );
+				if($this->method_array['text_validation_class']->submit()){
+					$insert = $this->model_array['insert_db_class']->insert_db_function("website_datatable", $insert_data_array);
+					if($insert == true){
+                      	$msg = getMsg_class::set("sucessfully insert");
+						header(address_class::header_page("plugins_memory_class", "website_page_function", $page, "&msg=$msg"));	
+					}else{
+						report_class::set_report("signin", "error", "you are not member.");
+						$this->view_load_object_arrays->view_load_functions(backend_class::page($page, $this->plugins_type, $this->plugins), $this->get_data_array);
+					}
+				}else{
+					report_class::set_report("signin", "error", "you are not member.");
+					$this->view_load_object_arrays->view_load_functions(backend_class::page($page, $this->plugins_type, $this->plugins), $this->get_data_array);
+				}
+			}else{
+				report_class::set_report("signin", "error", "you are not member.");
+				$this->view_load_object_arrays->view_load_functions(backend_class::page($page, $this->plugins_type, $this->plugins), $this->get_data_array);
+			}	
+		}else{
+        	$msg = getMsg_class::set("some problem");
+			header(address_class::header_page("plugins_memory_class", "website_page_function", "website", "&msg=$msg"));
+		}
+	}
+  	public function website_search_function($page = null, $array_key = false, $array_value = false){
+    	$keywords = isset($_POST['search']) ? $_POST['search'] : false;	
+		$this->get_data_array["website_datatable"] = $this->model_array["search_db_class"]->search_select_db_function("website_datatable", array("name" => $keywords, "title" => $keywords), array("status" => 1), "NAME ASC", $this->pageno);
+      	$this->view_load_object_arrays->view_load_functions(backend_class::page($page, $this->plugins_type, $this->plugins), $this->get_data_array);
+    }
+  	public function website_update_function($page = null, $array_key = false, $array_value = false){}
+    public function website_delete_function($page = null, $array_key = false, $array_value = false){}
+  
+  
+  	public function account_page_function($page = null, $array_key = false, $array_value = false){    
+      	$this->get_data_array["account_datatable"] = $this->model_array["pagenation_db_class"]->pagenation_select_db_function("account_datatable", array("status" => 1), "NAME ASC", $this->pageno, pagenation_class::$loop_item);
+		$this->view_load_object_arrays->view_load_functions(backend_class::page($page, $this->plugins_type, $this->plugins), $this->get_data_array);
+	}
+  	public function account_insert_function($page = null, $array_key = false, $array_value = false){
+      if(isset($_POST["submit"]) AND $_POST["submit"] == "save"){
+          $insert_data_array = array(
+            "name" => parent::data_control("name"),
+            "email" =>  parent::data_control("email"),
+            "mobile" =>  parent::data_control("mobile"),
+            "password" =>  parent::data_control("password"),
+            "note" =>  parent::data_control("note"),
+            "status" => 1
+          );
+          if($this->method_array['text_validation_class']->submit()){
+            $insert = $this->model_array['insert_db_class']->insert_db_function("account_datatable", $insert_data_array);
+            if($insert == true){
+              $msg = getMsg_class::set("sucessfully insert");
+              header(address_class::header_page("plugins_memory_class", "account_page_function", $page, "&msg=$msg"));	
+            }else{
+              report_class::set_report("signin", "error", "you are not member.");
+              $this->get_data_array["account_datatable"] = $this->model_array["pagenation_db_class"]->pagenation_select_db_function("account_datatable", array("status" => 1), "NAME ASC", $this->pageno, pagenation_class::$loop_item);
+              $this->view_load_object_arrays->view_load_functions(backend_class::page($page, $this->plugins_type, $this->plugins), $this->get_data_array);
+            }
+          }else{
+            report_class::set_report("signin", "error", "you are not member.");
+            $this->get_data_array["account_datatable"] = $this->model_array["pagenation_db_class"]->pagenation_select_db_function("account_datatable", array("status" => 1), "NAME ASC", $this->pageno, pagenation_class::$loop_item);
+           	$this->view_load_object_arrays->view_load_functions(backend_class::page($page, $this->plugins_type, $this->plugins), $this->get_data_array);
+          }	
+		}else{
+        	$msg = getMsg_class::set("some problem");
+			header(address_class::header_page("plugins_memory_class", "account_page_function", "account", "&msg=$msg"));
+		}
+	}
+  	public function account_search_function($page = null, $array_key = false, $array_value = false){
+    	$keywords = isset($_POST['search']) ? $_POST['search'] : false;	
+		$this->get_data_array["account_datatable"] = $this->model_array["search_db_class"]->search_select_db_function("account_datatable", array("name" => $keywords, "note" => $keywords), array("status" => 1), "NAME ASC", $this->pageno);
+      	$this->view_load_object_arrays->view_load_functions(backend_class::page($page, $this->plugins_type, $this->plugins), $this->get_data_array);
+    }
+  	public function account_update_function($page = null, $array_key = false, $array_value = false){}
+    public function account_delete_function($page = null, $array_key = false, $array_value = false){}
+  
+  
+  
+	public function about_function($page){
+		$this->get_data_array['about'] = simplexml_load_file(backend_class::source("assets/xml/about.xml", $this->plugins_type, $this->plugins));
+		if(isset($_REQUEST["about"]) AND $_REQUEST["about"] == "update"){
+			$name = code_class::base64url_encode($_POST["name"]);
+			$type = code_class::base64url_encode($_POST["type"]);
+			$title = code_class::base64url_encode($_POST["title"]);
+			$versions = code_class::base64url_encode($_POST["versions"]);
+			$author = code_class::base64url_encode($_POST["author"]);
+			$email = code_class::base64url_encode($_POST["email"]);
+			$mobile = code_class::base64url_encode($_POST["mobile"]);
+			$description = code_class::base64url_encode($_POST["description"]);
+			$home = code_class::base64url_encode($_POST["home"]);
+			$plugin = code_class::base64url_encode($_POST["plugin"]);
+			$menu = code_class::base64url_encode($_POST["menu"]);
+			$settings = code_class::base64url_encode($_POST["settings"]);
+			$update = code_class::base64url_encode(date("D/m/Y"));
+			foreach($this->get_data_array['about']->about as $about){
+				if($about["status"] == true){
+					$about->name = $name;
+					$about->type = $type;
+					$about->title = $title;
+					$about->versions = $versions;
+					$about->author = $author;
+					$about->email = $email;
+					$about->mobile = $mobile;
+					$about->description = $description;
+					$about->home = $home;
+					$about->plugin = $plugin;
+					$about->menu = $menu;
+					$about->settings = $settings;
+					$about->update = $update;
+				}
+			}
+			file_put_contents(backend_class::source("assets/xml/about.xml", $this->plugins_type, $this->plugins), $this->get_data_array['about']->asXML());
+		}
+		$this->view_load_object_arrays->view_load_functions(backend_class::page($page, $this->plugins_type, $this->plugins), $this->get_data_array);
+	}
+	public function settings($page){
+		$this->get_data_array['settings'] = simplexml_load_file(backend_class::source("assets/xml/settings.xml", $this->plugins_type, $this->plugins));
+		if(isset($_REQUEST["settings"]) AND $_REQUEST["settings"] == "update"){
+			foreach($this->get_data_array['settings']->settings as $settings){
+				if($settings["status"] == true){
+					$settings->name = parent::data_control("name");
+					$settings->author = parent::data_control("author");
+					$settings->version = parent::data_control("version");
+					$settings->banner = parent::file_control("banner", array("jpg", "jpeg", "gip", "png"), 5, $this->upload_image, $settings->banner);
+				}
+			}
+			file_put_contents(backend_class::source("assets/xml/settings.xml", $this->plugins_type, $this->plugins), $this->get_data_array['settings']->asXML());
+		}
+		$this->view_load_object_arrays->view_load_functions(backend_class::page($page, $this->plugins_type, $this->plugins), $this->get_data_array);
+	}
+	public function __destruct(){}
+}
+?>

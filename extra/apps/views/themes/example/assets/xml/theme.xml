@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<root>
+   	<theme id="1" status="1" name="example">
+		<name>example</name>
+		<title>this the first example of my project.</title>
+		<keywords>example, mvc example, mvc</keywords>
+		<description>&lt;p&gt;this the first example of my project. thfsdfsdfsis the first example of my project.&lt;/p&gt;&#13;</description>
+      	<icon>repository/uploads/example/img/487c1d4fcd1819d.jpg</icon>
+		<author>Israt Ahamed Sabbirczczxcz</author>
+      	<fixed_button>1</fixed_button>
+      	<scroll_button>1</scroll_button>
+      	<advertise>1</advertise>
+      	<maintenance>0</maintenance>
+      	<message>1</message>
+		<status>1</status>
+	</theme>
+</root>

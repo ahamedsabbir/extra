@@ -1,0 +1,1 @@
+<?php echo vendor_advertise_class::vendor_advertise_function($framework_advertise_datatable, "google"); ?>

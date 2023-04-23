@@ -1,0 +1,70 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<root>
+	<datatable status="1" name="framework_admin_datatable">
+	<sql>CREATE TABLE `framework_admin (&#13;
+ `id` int(11) NOT NULL AUTO_INCREMENT,&#13;
+ `name` varchar(255) NOT NULL,&#13;
+ `mobile` varchar(255) NOT NULL,&#13;
+ `email` varchar(255) NOT NULL,&#13;
+ `password` varchar(255) NOT NULL,&#13;
+ `photo` varchar(255) NOT NULL,&#13;
+ `question` text NOT NULL,&#13;
+ `answer` text NOT NULL,&#13;
+ `code` varchar(30) NOT NULL,&#13;
+ `date` timestamp NOT NULL DEFAULT current_timestamp(),&#13;
+ `level` int(11) NOT NULL,&#13;
+ `status` int(11) NOT NULL DEFAULT 0,&#13;
+ `permission` int(11) NOT NULL DEFAULT 0,&#13;
+ PRIMARY KEY (`id`)&#13;
+) ENGINE=InnoDB AUTO_INCREMENT=2 DEFAULT CHARSET=latin1</sql>
+<note>something</note>
+</datatable><datatable status="0" name="framework_chat_datatable"><sql>CREATE TABLE `framework_chat_datatable` (&#13;
+ `id` int(11) NOT NULL AUTO_INCREMENT,&#13;
+ `pc_user` varchar(255) NOT NULL,&#13;
+ `session_id` varchar(255) NOT NULL,&#13;
+ `chat` text NOT NULL,&#13;
+ `date` timestamp NOT NULL DEFAULT current_timestamp(),&#13;
+ PRIMARY KEY (`id`)&#13;
+) ENGINE=InnoDB AUTO_INCREMENT=16 DEFAULT CHARSET=latin1</sql></datatable><datatable status="0" name="framework_contact_datatable"><sql>CREATE TABLE `framework_contact_datatable` (&#13;
+ `id` int(11) NOT NULL AUTO_INCREMENT,&#13;
+ `name` varchar(255) NOT NULL,&#13;
+ `email` varchar(255) NOT NULL,&#13;
+ `message` text NOT NULL,&#13;
+ PRIMARY KEY (`id`)&#13;
+) ENGINE=InnoDB DEFAULT CHARSET=latin1</sql></datatable><datatable status="0" name="framework_project_datatable"><sql>CREATE TABLE `framework_project_datatable` (&#13;
+ `id` int(11) NOT NULL AUTO_INCREMENT,&#13;
+ `admin_id` int(11) NOT NULL,&#13;
+ `title` mediumtext NOT NULL,&#13;
+ `keywords` mediumtext NOT NULL,&#13;
+ `category_id` int(11) NOT NULL,&#13;
+ `description` mediumtext NOT NULL,&#13;
+ `personal` text NOT NULL,&#13;
+ `website` varchar(255) NOT NULL,&#13;
+ `git` varchar(255) NOT NULL,&#13;
+ `thamble` varchar(255) NOT NULL,&#13;
+ `zip_file` varchar(255) NOT NULL,&#13;
+ `date` timestamp NOT NULL DEFAULT current_timestamp(),&#13;
+ `level` int(11) NOT NULL DEFAULT 0,&#13;
+ `status` int(11) NOT NULL DEFAULT 1,&#13;
+ `ip_address` varchar(255) NOT NULL,&#13;
+ PRIMARY KEY (`id`)&#13;
+) ENGINE=MyISAM AUTO_INCREMENT=76 DEFAULT CHARSET=utf8</sql></datatable><datatable status="0" name="framework_visitor_datatable"><sql>CREATE TABLE `framework_visitor_datatable` (&#13;
+ `id` int(11) NOT NULL AUTO_INCREMENT,&#13;
+ `pc_user` varchar(255) NOT NULL,&#13;
+ `ip_address` varchar(255) NOT NULL,&#13;
+ `session_id` varchar(255) NOT NULL,&#13;
+ `browser` varchar(255) NOT NULL,&#13;
+ `country` varchar(255) NOT NULL,&#13;
+ `city` varchar(255) NOT NULL,&#13;
+ `date` timestamp NOT NULL DEFAULT current_timestamp(),&#13;
+ `status` int(11) NOT NULL DEFAULT 1,&#13;
+ PRIMARY KEY (`id`)&#13;
+) ENGINE=InnoDB AUTO_INCREMENT=22 DEFAULT CHARSET=utf8</sql></datatable><datatable status="0" name="framework_category_datatable"><sql>CREATE TABLE `framework_category_datatable` (&#13;
+ `id` int(11) NOT NULL AUTO_INCREMENT,&#13;
+ `sn` int(11) NOT NULL,&#13;
+ `category` varchar(30) NOT NULL,&#13;
+ `title` varchar(255) NOT NULL,&#13;
+ `icon` varchar(255) NOT NULL,&#13;
+ `font_icon` varchar(255) NOT NULL,&#13;
+ PRIMARY KEY (`id`)&#13;
+) ENGINE=InnoDB DEFAULT CHARSET=latin1</sql></datatable><datatable status="0" name="gdfgdfgdfg"><sql>fgdfgfdgdf</sql></datatable></root>

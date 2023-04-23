@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<root>
+  <database id="1" type="online">
+      <db_host>localhost</db_host>
+      <db_name>mvc_database</db_name>
+      <db_user>root</db_user>
+      <db_password></db_password>
+      <setup>1</setup>
+  </database>
+</root>

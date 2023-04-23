@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<root>
+   	<settings id="1">
+		<site>http://localhost/mvc/</site>
+      	<theme>example</theme>
+      	<post_datatable>example_datatable</post_datatable>
+      	<class_name>theme_example</class_name>
+      	<function_name>index_page_function</function_name>
+      	<page_name>index</page_name>
+		<loop_item>10</loop_item>
+		<mobile>+8801775567493</mobile>
+		<email>isratahamedsabbir@gmail.com</email>
+		<facebook>https://web.facebook.com/isratahamedsabbir</facebook>
+		<twitter>https://twitter.com/AhamedIsrat</twitter>
+		<linkedin>https://www.linkedin.com/in/israt-ahamed-sabbir-35401713b/</linkedin>
+		<instagram>https://www.instagram.com/ahirtausif/</instagram>
+		<youtube>https://www.youtube.com/channel/UC_OG5HTp__C9PmMV-2XrDEQ</youtube>
+		<github>https://github.com/ahamedsabbir</github>
+		<copy_header>© 2022 Copyright:</copy_header>
+		<copy_right>Bangladesh</copy_right>
+		<copy_link>http://www.github.com</copy_link>
+		<image_extension>jpg, jpeg, png</image_extension>
+        <image_size>5</image_size>
+        <video_extension>mp4, mpeg, 3gp</video_extension>
+        <video_size>200</video_size>
+        <file_extension>pdf, rar, zip, doc, docx, exe, jpg, jpeg, png, mp4, mpeg, 3gp</file_extension>
+        <file_size>200</file_size>
+	</settings>
+</root>

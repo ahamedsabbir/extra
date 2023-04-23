@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<root>
+	<settings status="1" admin="1">
+		<name>gallery</name>
+		<author>israt ahamed sabbie</author>
+		<version>1.1</version>
+		<banner>banner.jpg</banner>
+		<slider01>slider01.jpg</slider01>
+		<slider02>slider02.jpg</slider02>
+		<slider03>slider03.jpg</slider03>
+		<feture01>edite</feture01>
+		<feture01_image>feture01_image.jpg</feture01_image>
+		<feture01_text>good quality editor.</feture01_text>
+	</settings>
+</root>
