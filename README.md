@@ -9,5 +9,9 @@
 	2. extra/apps/views/themes
 - Make Mother controller on the loaction
 	1. extra/system/mvc/controls/main/controllers/frontend
+- Delete form unusal file
+	1. extra/apps/controllers/site/theme
+	2. extra/resources/uploads
+	3. extra/storage/uploads
 ## Extra Framework Theme Edite Process
 - 

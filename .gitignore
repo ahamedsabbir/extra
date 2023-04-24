@@ -1,1 +1,6 @@
-
+/.env
+/note.txt
+/extra/resources/json/info.json
+/extra/resources/ontes/onte.txt
+/extra/resources/xml/database.xml
+/extra/storage/backup/mvc_database.sql
